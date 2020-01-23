@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC  
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+   
+<mapper namespace="com.fh.dao.FlightDao">
+
+<select id="queryCount" parameterType="com.fh.model.Query" resultType="Integer">
+  select  count(*) from  t_flight f
+</select>
+
+<select id="queryList" parameterType="com.fh.model.Query" resultMap="MapList">
+select  f.*,sum(ti.flightcount) 'count',min(ti.price) 'price',t.name 'brandName',t.type 'brandNameType',concat(ifnull(a1.name,''),'-',ifnull(a2.name,''),'-',ifnull(a3.name,''))"startArea",
+concat(ifnull(t1.name,''),'-',ifnull(t2.name,''),'-',ifnull(t3.name,''))"entArea"
+from t_flight f left join t_type t on f.typeId=t.id
+left join t_ticket ti on f.id=ti.flightId
+left join  t_area a1 on f.startArea1=a1.id
+left join  t_area a2 on f.startArea2=a2.id
+left join  t_area a3 on f.startArea3=a3.id
+left join  t_area t1 on f.entArea1=t1.id
+left join  t_area t2 on f.entArea2=t2.id
+left join  t_area t3 on f.entArea3=t3.id
+limit #{start},#{length}
+</select>
+
+   <resultMap id="MapList" type="Map">
+    <result property="brandName" column="brandName"></result>
+    <result property="brandNameType" column="brandNameType"></result>
+    <result property="startArea" column="startArea"></result>
+    <result property="entArea" column="entArea"></result>
+
+    <result property="count" column="count"></result>
+    <result property="price" column="price"></result>
+   </resultMap>
+
+    <update id="updateStatus" parameterType="com.fh.model.Flight">
+        update t_flight set zt=#{zt} where id=#{id}
+    </update>
+
+</mapper>
