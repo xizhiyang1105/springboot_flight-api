@@ -20,6 +20,7 @@ left join  t_area a3 on f.startArea3=a3.id
 left join  t_area t1 on f.entArea1=t1.id
 left join  t_area t2 on f.entArea2=t2.id
 left join  t_area t3 on f.entArea3=t3.id
+group by ti.flightId
 limit #{start},#{length}
 </select>
 
@@ -34,7 +35,13 @@ limit #{start},#{length}
    </resultMap>
 
     <update id="updateStatus" parameterType="com.fh.model.Flight">
-        update t_flight set zt=#{zt} where id=#{id}
+        update t_flight t set t.zt=#{zt} where t.id=#{id}
     </update>
 
+    <select id="queryAreaListBypid" parameterType="int" resultType="com.fh.model.Area">
+        select  * from  t_area where pid=#{pid}
+    </select>
+    <select id="queryTypeList" resultType="com.fh.model.Type">
+        select * from t_type
+    </select>
 </mapper>

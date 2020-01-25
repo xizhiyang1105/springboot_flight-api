@@ -2,8 +2,8 @@ package com.fh.service.impl;
 
 import com.fh.action.YH.ServletRequest;
 import com.fh.dao.FlightDao;
-import com.fh.model.Flight;
-import com.fh.model.Query;
+import com.fh.dao.TicketDao;
+import com.fh.model.*;
 import com.fh.service.FlightService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,8 @@ import java.util.Map;
 public class FlightServiceImpl implements FlightService {
     @Resource
     private FlightDao flightDao;
+    @Resource
+    private TicketDao ticketDao;
 
     @Override
     public ServletRequest queryFlightList(Query query) {
@@ -30,10 +32,50 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void updateProductStatus(Integer id, Integer zt) {
-        Flight flight =new Flight();
-        flight.setId(id);
-        flight.setZt(zt);
+    public void updateProductStatus(Flight flight) {
+        flight.setId(flight.getId());
+        flight.setZt(flight.getZt());
         flightDao.updateStatus(flight);
+    }
+
+    @Override
+    public List<Area> queryAreaListBypid(Integer pid) {
+        return flightDao.queryAreaListBypid(pid);
+    }
+
+    @Override
+    public ServletRequest queryTypeList() {
+        List<Type> list=flightDao.queryTypeList();
+        return ServletRequest.success(list);
+    }
+
+    @Override
+    public ServletRequest addFlight(Flight flight) {
+        Integer acount = flight.getAcount();
+        double aprice = flight.getAprice();
+        Integer bcount = flight.getBcount();
+        double bprice = flight.getBprice();
+        flightDao.insert(flight);
+        Ticket ticket=new Ticket();
+        ticket.setFlightId(flight.getId());
+        if(acount!=null){
+            ticket.setFlightcount(acount);
+        }
+        if(aprice!=0){
+            ticket.setPrice(aprice);
+        }
+        ticket.setType(2);
+        ticketDao.insert(ticket);
+        Ticket ticket1=new Ticket();
+        ticket1.setFlightId(flight.getId());
+        if(bcount!=null){
+            ticket1.setFlightcount(bcount);
+        }
+        if(bprice!=0){
+            ticket1.setPrice(bprice);
+        }
+        ticket1.setType(1);
+        ticketDao.insert(ticket1);
+        return ServletRequest.success();
     }
 }

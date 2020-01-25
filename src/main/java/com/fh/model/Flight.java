@@ -43,6 +43,47 @@ public class Flight {
     @TableField(exist = false)
     private double brandNameType;
 
+    @TableField(exist = false)
+    private double aprice;
+    @TableField(exist = false)
+    private double bprice;
+    @TableField(exist = false)
+    private Integer acount;
+    @TableField(exist = false)
+    private Integer bcount;
+
+    public double getAprice() {
+        return aprice;
+    }
+
+    public void setAprice(double aprice) {
+        this.aprice = aprice;
+    }
+
+    public double getBprice() {
+        return bprice;
+    }
+
+    public void setBprice(double bprice) {
+        this.bprice = bprice;
+    }
+
+    public Integer getAcount() {
+        return acount;
+    }
+
+    public void setAcount(Integer acount) {
+        this.acount = acount;
+    }
+
+    public Integer getBcount() {
+        return bcount;
+    }
+
+    public void setBcount(Integer bcount) {
+        this.bcount = bcount;
+    }
+
     public double getBrandNameType() {
         return brandNameType;
     }
