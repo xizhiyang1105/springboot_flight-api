@@ -78,4 +78,10 @@ public class FlightServiceImpl implements FlightService {
         ticketDao.insert(ticket1);
         return ServletRequest.success();
     }
+
+    @Override
+    public List<Flight> querylist(Query query) {
+        List<Flight> list =flightDao.querylist(query);
+        return list;
+    }
 }

@@ -17,4 +17,6 @@ public interface FlightService {
     ServletRequest queryTypeList();
 
     ServletRequest addFlight(Flight flight);
+
+    List<Flight> querylist(Query query);
 }

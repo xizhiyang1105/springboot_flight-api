@@ -18,4 +18,6 @@ public interface FlightDao extends BaseMapper<Flight> {
     List<Area> queryAreaListBypid(Integer pid);
 
     List<Type> queryTypeList();
+
+    List<Flight> querylist(Query query);
 }

@@ -4,18 +4,24 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fh.action.ZJ.ExcelFild;
+import com.fh.action.ZJ.ExcelHeard;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @TableName("t_flight")
+@ExcelHeard(title = "航班信息")
 public class Flight {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
+    @ExcelFild(name = "航班名称")
     private String name;
     private Integer typeId;
+    @ExcelFild(name = "起飞时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
     private Date startTime;
+    @ExcelFild(name = "到达时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
     private Date endTime;
     private Integer startArea1;
@@ -31,14 +37,19 @@ public class Flight {
 
 
     @TableField(exist = false)
+    @ExcelFild(name = "机型")
     private String brandName;
     @TableField(exist = false)
+    @ExcelFild(name = "起飞地点")
     private String startArea;
     @TableField(exist = false)
+    @ExcelFild(name = "到达地点")
     private String entArea;
     @TableField(exist = false)
+    @ExcelFild(name = "票数")
     private Integer count;
     @TableField(exist = false)
+    @ExcelFild(name = "票价")
     private double price;
     @TableField(exist = false)
     private double brandNameType;
