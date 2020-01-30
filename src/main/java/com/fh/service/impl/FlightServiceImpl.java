@@ -84,4 +84,11 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> list =flightDao.querylist(query);
         return list;
     }
+
+    @Override
+    public void upFlightByList(List list) {
+        for (int i = 0; i <list.size() ; i++) {
+            flightDao.upFlightByList(Integer.parseInt((String) list.get(i)));
+        }
+    }
 }

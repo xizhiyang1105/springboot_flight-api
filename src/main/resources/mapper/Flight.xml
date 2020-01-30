@@ -59,4 +59,9 @@ limit #{start},#{length}
     <select id="queryTypeList" resultType="com.fh.model.Type">
         select * from t_type
     </select>
+
+    <update id="upFlightByList" parameterType="int">
+       update t_flight t set t.zt=2 where t.id=#{id}
+    </update>
+
 </mapper>

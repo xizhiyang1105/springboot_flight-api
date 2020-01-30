@@ -19,4 +19,6 @@ public interface FlightService {
     ServletRequest addFlight(Flight flight);
 
     List<Flight> querylist(Query query);
+
+    void upFlightByList(List list);
 }

@@ -6,10 +6,7 @@ import com.fh.model.Flight;
 import com.fh.model.Query;
 import com.fh.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,4 +45,12 @@ public class FlightAction {
     public ServletRequest addFlight(Flight flight){
         return flightService.addFlight(flight);
     }
+
+    @RequestMapping("upFlightByList")
+    public ServletRequest upFlightByList(@RequestParam("ids[]") List list){
+        flightService.upFlightByList(list);
+        return ServletRequest.success();
+    }
+
+
 }

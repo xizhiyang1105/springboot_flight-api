@@ -20,4 +20,6 @@ public interface FlightDao extends BaseMapper<Flight> {
     List<Type> queryTypeList();
 
     List<Flight> querylist(Query query);
+
+    void upFlightByList(Integer o);
 }
